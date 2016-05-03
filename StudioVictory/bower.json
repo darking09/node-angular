@@ -1,0 +1,13 @@
+{
+    "name": "StudioVictory",
+    "version": "0.0.1",
+    "author": "Fernando Jose Torres Bermudez",
+    "license": "MIT",
+    "dependencies": {
+        "angular": "latest",
+        "font-awesome": "latest",
+        "lodash": "latest",
+        "normalize-css": "latest",
+        "requirejs": "latest"
+    }
+}
