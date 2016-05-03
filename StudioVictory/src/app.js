@@ -1,42 +1,42 @@
 'use strict';
 
-//Loading dependencies
+// Loading dependencies
 var express = require('express');
 var path = require('path');
 
-
-//Initializing express application
+// Initializing express application
 var app = express();
 
 // Loading Config
 var config = require('./lib/config');
 console.log('Configuration', config().views);
-//Body Parser
+
+// Body Parser
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-//Logger
+// Logger
 var logger = require('morgan');
 app.use(logger('dev'));
 
-//Cokies/ Session
+// Cookies / Session
 var cookieParser = require('cookie-parser');
 app.use(cookieParser());
 
 // Layout setup
 var exphbs = require('express-handlebars');
 
-//Stylus setup
+// Stylus setup
 var stylus = require('stylus');
 var nib = require('nib');
 
-//Handlebars setup
-app.engine(config().views, exphbs({
-  extname: config().views.extension,
-  defaultlayout: config().views.layout,
-  layoutsDir: __dirname + '/views/layouts',
-  partialsDir: __dirname + '/views/partials',
+// Handlebars setup
+app.engine(config().views.engine, exphbs({
+    extname: config().views.extension,
+    defaultLayout: config().views.layout,
+    layoutsDir: __dirname + '/views/layouts',
+    partialsDir: __dirname + '/views/partials'
 }));
 
 // View engine setup
@@ -44,7 +44,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', '.hbs');
 app.use(express.static(path.join(__dirname, 'public')));
 
-//Routes
+// Routes
 var home = require('./routes/home');
 var users = require('./routes/users');
 
@@ -59,7 +59,6 @@ app.use(function(req, res, next) {
 });
 
 // error handlers
-
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
@@ -78,9 +77,9 @@ app.use(function(err, req, res, next) {
   });
 });
 
-//Export application or start the server
-if(!!module.parent){
+// Export application or start the server
+if (!!module.parent) {
   module.exports = app;
-}else{
+} else {
   app.listen(config().serverPort);
 }
