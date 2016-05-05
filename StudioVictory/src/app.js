@@ -9,7 +9,6 @@ var app = express();
 
 // Loading Config
 var config = require('./lib/config');
-console.log('Configuration', config().views);
 
 // Body Parser
 var bodyParser = require('body-parser');
