@@ -30,7 +30,21 @@ var exphbs = require('express-handlebars');
 
 // Stylus setup
 var stylus = require('stylus');
-var nib = require('nib');
+
+//Compile Stylus on the fly
+if (!config().html.css.stylusPrecompile) {
+  app.use(
+    stylus.middleware({
+      src: __dirname + '/stylus',
+      dest: __dirname + '/public/css',
+      compile: function(str, path) {
+        return stylus(str)
+                .set('filename', path)
+                .set('compress', config().html.css.compress);
+      }
+    })
+  );
+}
 
 // Handlebars setup
 app.engine(config().views.engine, exphbs({
@@ -42,7 +56,7 @@ app.engine(config().views.engine, exphbs({
 
 // View engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', '.hbs');
+app.set('view engine', config().views.engine);
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
