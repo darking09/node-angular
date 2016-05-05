@@ -14,7 +14,9 @@ console.log('Configuration', config().views);
 // Body Parser
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
 
 // Logger
 var logger = require('morgan');
