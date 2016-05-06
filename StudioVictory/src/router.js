@@ -16,12 +16,10 @@ module.exports = function(app) {
 
   // Sending variables to templates
   app.use(function(req, res, next) {
-
     res.locals.isMobile = utils.isMobile(req.headers['user-agent']);
     res.locals.config.basePath = config().baseUrl + i18n.getLanguagePath(req.url);
     res.locals.currentLanguage = i18n.getCurrentLanguage(req.url);
     res.__ = res.locals.__ = i18n.load(i18n.getCurrentLanguage(req.url));
-
     next();
   });
 

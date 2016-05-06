@@ -19,6 +19,11 @@ production: &default
     list: [en, es, fr, pt, jp]
   security:
     secret: darking09
+  session:
+    cookieDomain: .studiovictory.com
+    maxAge: 86400
+    cookiePrefix: 'scSession_'
+    httpOnly: true
 stage: &stage
   <<: *default
   baseUrl: http://stage.studiovictory.com
@@ -31,7 +36,7 @@ development:
   <<: *latest
   baseUrl: http://local.studiovictory.com
   html:
-    minify: false
+    minify: true
     css:
       compress: false
       stylusPrecompile: false
