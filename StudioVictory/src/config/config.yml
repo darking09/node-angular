@@ -17,7 +17,8 @@ production: &default
   languages:
     default: en
     list: [en, es, fr, pt, jp]
-
+  security:
+    secret: darking09
 stage: &stage
   <<: *default
   baseUrl: http://stage.studiovictory.com
